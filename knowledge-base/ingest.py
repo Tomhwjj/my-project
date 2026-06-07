@@ -5,6 +5,10 @@
 import os
 import sys
 
+# 强制 UTF-8 输出，避免 Windows GBK 乱码
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 # 国内用户用 HuggingFace 镜像加速
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
