@@ -22,7 +22,7 @@ cp -r image-recognition ~/.claude/skills/image-recognition
 ```bash
 cd ~/.claude
 python -m venv venv
-./venv/Scripts/pip install Pillow requests
+./venv/Scripts/pip install -r image-recognition/requirements.txt
 ```
 
 ### 3. 安装 Ollama + 模型（本地方案）
