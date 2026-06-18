@@ -1,0 +1,47 @@
+{
+  "cookies": [
+    {
+      "name": "UM_distinctid",
+      "value": "19ed8c6f43de75-09251059f28993-26061151-13c680-19ed8c6f43e2462",
+      "domain": ".gradpen.com",
+      "path": "/",
+      "expires": 1797478177,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "CNZZDATA1281474341",
+      "value": "538934683-1781753378-%7C1781753378",
+      "domain": "lw.gradpen.com",
+      "path": "/",
+      "expires": 1797478182,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://lw.gradpen.com",
+      "localStorage": [
+        {
+          "name": "primary_color",
+          "value": "#047FF8"
+        },
+        {
+          "name": "activityHidden",
+          "value": "true"
+        },
+        {
+          "name": "activityHiddenDate",
+          "value": "2026-06-18T03:29:43.544Z"
+        },
+        {
+          "name": "_um_apm69dc97196f259537c79751cf",
+          "value": "{\"uid\":\"2df4651f421c4fa4a788b8084d0367ab\"}"
+        }
+      ]
+    }
+  ]
+}
