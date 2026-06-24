@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交易日志</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { margin-bottom: 20px; color: #38bdf8; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: #1e293b; border-radius: 8px; padding: 20px; }
+  .card h2 { margin-bottom: 12px; font-size: 16px; color: #94a3b8; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  form input, form select, form button { padding: 8px 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #e2e8f0; font-size: 14px; }
+  form button { grid-column: span 2; background: #38bdf8; color: #0f172a; font-weight: bold; cursor: pointer; border: none; }
+  form button:hover { background: #7dd3fc; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #334155; }
+  th { color: #94a3b8; font-weight: 500; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+  .tag-buy { background: #065f46; color: #6ee7b7; }
+  .tag-sell { background: #7f1d1d; color: #fca5a5; }
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 20px; }
+  .stat { background: #1e293b; padding: 16px; border-radius: 8px; text-align: center; }
+  .stat .num { font-size: 28px; font-weight: bold; color: #38bdf8; }
+  .stat .lbl { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📊 交易日志</h1>
+  <div class="stats-row" id="statsRow"></div>
+  <div class="grid">
+    <div class="card">
+      <h2>✏️ 录入交易</h2>
+      <form id="tradeForm">
+        <input name="code" placeholder="代码 600900" required>
+        <select name="direction" required><option value="buy">买入</option><option value="sell">卖出</option></select>
+        <input name="price" type="number" step="0.01" placeholder="价格 26.50" required>
+        <input name="trade_time" type="text" placeholder="2026-06-24 14:30" required>
+        <select name="position"><option value="">仓位</option><option>轻仓</option><option>半仓</option><option>满仓</option><option>试错</option></select>
+        <select name="strategy"><option value="">策略</option><option>ABC浪</option><option>量能突破</option><option>板块跟风</option><option>情绪化</option></select>
+        <select name="emotion"><option value="">情绪</option><option>正常</option><option>冲动</option><option>止损</option><option>止盈</option><option>补仓</option><option>割肉</option><option>追高</option></select>
+        <button type="submit">提交</button>
+      </form>
+    </div>
+    <div class="card">
+      <h2>📋 最近交易</h2>
+      <table><thead><tr><th>时间</th><th>代码</th><th>名称</th><th>方向</th><th>价格</th><th>盈亏</th><th>策略</th></tr></thead><tbody id="tradeList"></tbody></table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h2>📈 盈亏曲线</h2>
+    <canvas id="pnlChart" height="80"></canvas>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
