@@ -1,0 +1,96 @@
+{
+  "overall_score": 0.14,
+  "probability": "较低 (<35%)",
+  "recommendation": "文本较为自然，仅需微调",
+  "metrics": {
+    "句子均匀度": {
+      "score": 0.1,
+      "avg": 38,
+      "std": 27,
+      "ratio": 0.73,
+      "issue": "句子长度有自然变化"
+    },
+    "机械过渡词": {
+      "score": 0.1,
+      "count": 5,
+      "pct": 3.4,
+      "found": [
+        {
+          "sentence": "第一，大多数研究只盯设计或施工某一个片段，从规划到运维拉通来看的很少",
+          "transition": "第一",
+          "category": "序号型"
+        },
+        {
+          "sentence": "第二，BIM跟AI、物联网这些新技术搭在一起的真实项目数据，成规模的报道几乎没有",
+          "transition": "第二",
+          "category": "序号型"
+        },
+        {
+          "sentence": "第三，讲BIM推广障碍的文章不少，但多数是在罗列问题、罗列对策，很少把几个障碍因",
+          "transition": "第三",
+          "category": "序号型"
+        },
+        {
+          "sentence": "最后一项，制度",
+          "transition": "最后",
+          "category": "序号型"
+        },
+        {
+          "sentence": "最后得承认，这篇论文能做的分析深度是有限度的",
+          "transition": "最后",
+          "category": "序号型"
+        }
+      ],
+      "issue": "过渡词使用自然"
+    },
+    "抽象模板": {
+      "score": 0.1,
+      "total": 0,
+      "density": 0.0,
+      "found": [],
+      "issue": "语言较为具体"
+    },
+    "同质化句式": {
+      "score": 0.2,
+      "total": 1,
+      "density": 0.7,
+      "patterns": {
+        "框架式": {
+          "count": 1,
+          "examples": [
+            "从协同的角度"
+          ]
+        }
+      },
+      "issue": "句式有一定变化"
+    },
+    "词汇多样性": {
+      "score": 0.2,
+      "ttr": 0.456,
+      "unique": 1092,
+      "total": 2394,
+      "issue": "词汇多样性良好"
+    },
+    "高频词过度": {
+      "score": 0.2,
+      "count": 2,
+      "words": {
+        "持续": {
+          "per_1k": 0.2,
+          "threshold": 0.15
+        },
+        "系统": {
+          "per_1k": 0.2,
+          "threshold": 0.15
+        }
+      },
+      "issue": "高频词使用正常"
+    }
+  },
+  "stats": {
+    "paragraphs": 66,
+    "sentences": 149,
+    "chinese_chars": 4202,
+    "chinese_words": 2394
+  }
+}
