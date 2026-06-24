@@ -1,0 +1,108 @@
+{
+  "numStartups": 6,
+  "tipsHistory": {
+    "agents-view-multiclauding": 2,
+    "new-user-warmup": 2,
+    "plan-mode-for-complex-tasks": 2,
+    "color-when-multi-clauding": 2,
+    "memory-command": 2,
+    "theme-command": 3,
+    "powershell-tool-env": 5
+  },
+  "promptQueueUseCount": 1,
+  "hasCompletedOnboarding": true,
+  "firstStartTime": "2026-06-02T11:20:27.318Z",
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+  "seenNotifications": {},
+  "migrationVersion": 13,
+  "userID": "77901a480ffb8da3c28b961e628b907f0edcb2501d72df6569fed7217e960c6f",
+  "skillUsage": {
+    "init": {
+      "usageCount": 1,
+      "lastUsedAt": 1780489073100
+    },
+    "knowledge-base": {
+      "usageCount": 2,
+      "lastUsedAt": 1780838219875
+    },
+    "find-skills": {
+      "usageCount": 5,
+      "lastUsedAt": 1782215607758
+    },
+    "image-recognition": {
+      "usageCount": 2,
+      "lastUsedAt": 1781859851358
+    },
+    "skill-creator": {
+      "usageCount": 1,
+      "lastUsedAt": 1781750177595
+    },
+    "humanize-academic-writing": {
+      "usageCount": 2,
+      "lastUsedAt": 1781855408052
+    },
+    "deep-research": {
+      "usageCount": 2,
+      "lastUsedAt": 1781855004158
+    },
+    "writing-plans": {
+      "usageCount": 3,
+      "lastUsedAt": 1782274092653
+    },
+    "brainstorming": {
+      "usageCount": 2,
+      "lastUsedAt": 1782272747523
+    }
+  },
+  "changelogLastFetched": 1781424965226,
+  "lastReleaseNotesSeen": "2.1.177",
+  "projects": {
+    "C:/Users/何伟": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastGracefulShutdown": false,
+      "lastVersionBase": "2.1.177"
+    }
+  },
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "tipLifetimeShownCounts": {
+    "agents-view-multiclauding": 1,
+    "new-user-warmup": 1,
+    "plan-mode-for-complex-tasks": 1,
+    "color-when-multi-clauding": 1,
+    "memory-command": 1,
+    "theme-command": 1,
+    "powershell-tool-env": 1
+  },
+  "machineID": "e43572d91e89f1a7d4f4503ab591f4e7391b6db8f3570447e5d377d27b96625b",
+  "mcpServers": {
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--cdp-endpoint=chrome",
+        "--caps=network,storage"
+      ],
+      "env": {}
+    }
+  }
+}
