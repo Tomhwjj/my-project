@@ -14,13 +14,12 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 
 ## 触发条件
 
-- `/daily-report` 或 "日报" "今日速报" → 执行完整日报流程
-- "看板块" "板块排行" "哪些板块在涨" → 板块扫描
-- "看<板块名>" 如 "看电力板块" → 指定板块选股
-- "分析<股票>" 如 "分析长江电力" → 个股深度数据
-- "筛<条件>" 如 "筛PE<20" → 条件选股
+- **"日报"** / "今日速报" / "收盘速报" — 执行完整日报流程
+- "看板块" "板块排行" "哪些板块在涨" — 板块扫描
+- "看<板块名>" 如 "看电力板块" — 指定板块选股
+- "分析<股票>" 如 "分析长江电力" — 个股深度数据
 
-## 工作流：日报 (/daily-report)
+## 工作流：日报
 
 ### Step 1 — 板块扫描
 
@@ -33,7 +32,7 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 
 ### Step 2 — 板块选股
 
-对每个锁定板块，执行: `python D:\Agent\git\stock-workflow\fetcher\fetcher.py stocks <板块代码>`
+对每个锁定板块，一次性执行: `python D:\Agent\git\stock-workflow\fetcher\fetcher.py stocks <板块1> <板块2> <板块3>`
 
 加权打分规则 (满分 10 分):
 - **资金面 (50%，5 分)**: 主力净流入占比 = fund_flow / turnover。> 10% = 5 分，5-10% = 4 分，0-5% = 3 分，-5-0% = 2 分，< -5% = 1 分

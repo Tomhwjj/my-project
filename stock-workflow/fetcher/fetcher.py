@@ -104,66 +104,76 @@ def cmd_sectors():
 # ── stocks ─────────────────────────────────────────────
 
 def cmd_stocks():
-    """拉取指定板块成分股。
+    """拉取指定板块成分股，支持批量。
 
-    用法: python fetcher.py stocks BK0428
+    用法: python fetcher.py stocks BK1137 BK1036 BK1101
     """
     if len(sys.argv) < 3:
-        print("用法: python fetcher.py stocks <板块代码>", file=sys.stderr)
-        print("示例: python fetcher.py stocks BK0428", file=sys.stderr)
+        print("用法: python fetcher.py stocks <板块代码...>", file=sys.stderr)
+        print("示例: python fetcher.py stocks BK1137 BK1036 BK1101", file=sys.stderr)
         sys.exit(1)
 
-    sector_code = sys.argv[2]
-    params = {
-        "fid": "f3",
-        "po": "1",
-        "pz": "200",
-        "pn": "1",
-        "np": "1",
-        "fltt": "2",
-        "invt": "2",
-        "fs": f"b:{sector_code}",
-        "fields": "f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f62,f66,f184",
-    }
-    data = _api("clist/get", params)
-    if not data or "diff" not in data:
-        print(json.dumps({"error": f"无板块 {sector_code} 数据", "stocks": []}, ensure_ascii=False))
-        sys.exit(1)
+    sector_codes = sys.argv[2:]
+    all_results = []
 
-    stocks = []
-    raw_stocks = data["diff"]
-    stock_items = list(raw_stocks.values()) if isinstance(raw_stocks, dict) else raw_stocks
-    for item in stock_items:
-        if item.get("f2") == "-":
+    for idx, sector_code in enumerate(sector_codes):
+        if idx > 0:
+            time.sleep(1.5)  # 批量请求间隔，防限流
+
+        params = {
+            "fid": "f3",
+            "po": "1",
+            "pz": "200",
+            "pn": "1",
+            "np": "1",
+            "fltt": "2",
+            "invt": "2",
+            "fs": f"b:{sector_code}",
+            "fields": "f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f62,f66,f184",
+        }
+        data = _api("clist/get", params)
+        if not data or "diff" not in data:
+            all_results.append({"sector_code": sector_code, "total": 0, "stocks": [], "error": "无数据"})
             continue
-        stocks.append({
-            "code": item.get("f12", ""),
-            "name": item.get("f14", ""),
-            "market": item.get("f13", 0),
-            "price": item.get("f2", 0),
-            "pct": item.get("f3", 0),
-            "change": item.get("f4", 0),
-            "volume": item.get("f5", 0) or 0,
-            "turnover": item.get("f6", 0) or 0,
-            "amplitude": item.get("f7", 0),
-            "volume_ratio": item.get("f8", 0),
-            "pe": item.get("f9", 0),
-            "turnover_rate": item.get("f10", 0),
-            "high": item.get("f15", 0),
-            "low": item.get("f16", 0),
-            "open": item.get("f17", 0),
-            "prev_close": item.get("f18", 0),
-            "market_cap": item.get("f20", 0) or 0,
-            "fund_flow": item.get("f62", 0) or 0,
-            "super_large_flow": item.get("f66", 0) or 0,
-            "pct_5d": item.get("f184", 0),
+
+        stocks = []
+        raw_stocks = data["diff"]
+        stock_items = list(raw_stocks.values()) if isinstance(raw_stocks, dict) else raw_stocks
+        for item in stock_items:
+            if item.get("f2") == "-":
+                continue
+            stocks.append({
+                "code": item.get("f12", ""),
+                "name": item.get("f14", ""),
+                "market": item.get("f13", 0),
+                "price": item.get("f2", 0),
+                "pct": item.get("f3", 0),
+                "change": item.get("f4", 0),
+                "volume": item.get("f5", 0) or 0,
+                "turnover": item.get("f6", 0) or 0,
+                "amplitude": item.get("f7", 0),
+                "volume_ratio": item.get("f8", 0),
+                "pe": item.get("f9", 0),
+                "turnover_rate": item.get("f10", 0),
+                "high": item.get("f15", 0),
+                "low": item.get("f16", 0),
+                "open": item.get("f17", 0),
+                "prev_close": item.get("f18", 0),
+                "market_cap": item.get("f20", 0) or 0,
+                "fund_flow": item.get("f62", 0) or 0,
+                "super_large_flow": item.get("f66", 0) or 0,
+                "pct_5d": item.get("f184", 0),
+            })
+
+        all_results.append({
+            "sector_code": sector_code,
+            "total": len(stocks),
+            "stocks": stocks,
         })
 
     result = {
         "updated": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "sector_code": sector_code,
-        "total": len(stocks),
-        "stocks": stocks,
+        "results": all_results,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
