@@ -7,7 +7,7 @@
 ## 数据层路径
 
 ```
-D:\Agent\git\stock-workflow\fetcher\fetcher.py
+D:\Agent\git\trading-system\fetcher\fetcher.py
 ```
 
 所有数据通过上述 Python 脚本获取，输出 JSON。
@@ -18,12 +18,18 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 - "看板块" "板块排行" "哪些板块在涨" — 板块扫描
 - "看<板块名>" 如 "看电力板块" — 指定板块选股
 - "分析<股票>" 如 "分析长江电力" — 个股深度数据
+- **"记一笔 <方向> <代码> <价格> <时间> <仓位> <策略>"** — 调 POST /api/trades 录入，默认今天日期
+- **"记一笔 <方向> <代码> <价格> <时间> <仓位> <策略> <情绪>"** — 含情绪标注
+- 示例："记一笔 买入 600900 26.5 14:30 半仓 波段"
+- "交易记录" "最近交易" — 查询
+- "本月统计" "胜率" — 统计
+- "当前持仓" — 持仓一览
 
 ## 工作流：日报
 
 ### Step 1 — 板块扫描
 
-执行: `python D:\Agent\git\stock-workflow\fetcher\fetcher.py sectors`
+执行: `python D:\Agent\git\trading-system\fetcher\fetcher.py sectors`
 
 分析规则:
 1. 筛选「涨跌幅 > 0」且「主力净流入 > 0」的板块
@@ -32,7 +38,7 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 
 ### Step 2 — 板块选股
 
-对每个锁定板块，一次性执行: `python D:\Agent\git\stock-workflow\fetcher\fetcher.py stocks <板块1> <板块2> <板块3>`
+对每个锁定板块，一次性执行: `python D:\Agent\git\trading-system\fetcher\fetcher.py stocks <板块1> <板块2> <板块3>`
 
 加权打分规则 (满分 10 分):
 - **资金面 (50%，5 分)**: 主力净流入占比 = fund_flow / turnover。> 10% = 5 分，5-10% = 4 分，0-5% = 3 分，-5-0% = 2 分，< -5% = 1 分
@@ -74,11 +80,11 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 
 ### 看板块排行
 
-用户说"看板块" → 执行 `python D:\Agent\git\stock-workflow\fetcher\fetcher.py sectors` → 输出涨幅 TOP15 + 资金流入 TOP15 双表。
+用户说"看板块" → 执行 `python D:\Agent\git\trading-system\fetcher\fetcher.py sectors` → 输出涨幅 TOP15 + 资金流入 TOP15 双表。
 
 ### 看指定板块
 
-用户说"看电力板块" → 解析板块名 → 从 sectors 数据中找到对应代码 → 执行 `python D:\Agent\git\stock-workflow\fetcher\fetcher.py stocks <代码>` → 按打分规则排序 → 输出 TOP10 标的表。
+用户说"看电力板块" → 解析板块名 → 从 sectors 数据中找到对应代码 → 执行 `python D:\Agent\git\trading-system\fetcher\fetcher.py stocks <代码>` → 按打分规则排序 → 输出 TOP10 标的表。
 
 板块名称→代码映射规律（常见行业）:
 - 电力 = BK0428, 银行 = BK0475, 证券 = BK0473
@@ -88,7 +94,7 @@ D:\Agent\git\stock-workflow\fetcher\fetcher.py
 
 ### 分析个股
 
-用户说"分析长江电力" → 执行 `python D:\Agent\git\stock-workflow\fetcher\fetcher.py detail <代码>` → 输出：
+用户说"分析长江电力" → 执行 `python D:\Agent\git\trading-system\fetcher\fetcher.py detail <代码>` → 输出：
 - **行情快照**: 现价/涨跌/PE/市值/换手/量比
 - **资金面**: 结合 stocks 命令获取的 fund_flow 和 super_large_flow
 - **综合简评**: 基于 PE 估值水平、量比活跃度、资金流向的一两句话（注明不构成投资建议）
