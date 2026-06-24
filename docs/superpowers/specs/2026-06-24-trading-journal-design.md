@@ -47,6 +47,7 @@ Claude Code 对话层         Web 看板层
 | code | TEXT | **手动** | 股票代码 |
 | direction | TEXT | **手动** | buy/sell |
 | price | REAL | **手动** | 成交价 |
+| trade_time | TEXT | **手动** | 交易时间 yyyy-MM-dd HH:mm |
 | position | TEXT | **手动** | 轻/半/满/试错 |
 | strategy | TEXT | **手动** | ABC浪/量能突破/板块跟风/情绪化 |
 | emotion | TEXT | **手动** | 冲动/止损/止盈/补仓/割肉/追高/正常 |
@@ -59,7 +60,7 @@ Claude Code 对话层         Web 看板层
 | hold_days | INTEGER | 自动 | 持仓时长 |
 | profit_loss | REAL | 自动 | 盈亏金额 |
 | profit_pct | REAL | 自动 | 盈亏比例 |
-| trade_date | TEXT | 自动 | 交易日期 |
+| trade_date | TEXT | 自动 | 日期（从 trade_time 提取） |
 
 ### config 表
 
@@ -73,10 +74,10 @@ Claude Code 对话层         Web 看板层
 ### 方式 A：Claude Code 对话
 
 ```
-用户："记一笔 买入 600900 26.5 半仓 波段"
+用户："记一笔 买入 600900 26.5 14:30 半仓 波段"
 
 Claude 解析 → 调 API → 自动补全 → 返回确认：
-"✅ 已记录：长江电力 600900 买入 26.50 半仓 波段
+"✅ 已记录：长江电力 600900 买入 26.50 14:30 半仓 波段
     板块：电力 +2.1%  大盘：震荡  换手率：0.3%"
 ```
 
